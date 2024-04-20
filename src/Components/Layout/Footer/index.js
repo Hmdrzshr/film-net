@@ -18,10 +18,10 @@ export default function Footer() {
                         <Link to="#">
                            <h3>پرسش های متداول</h3>
                         </Link>
-                        <Link to="#">
+                        <Link to="/contact-us">
                            <h3>تماس با ما</h3>
                         </Link>
-                        <Link to="#">
+                        <Link to="about-us">
                            <h3>درباره فیلم نت</h3>
                         </Link>
                         <Link to="#">

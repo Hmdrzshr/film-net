@@ -8,6 +8,7 @@ body {
     margin:0;
     direction:rtl;
     font-family: Vazirmatn;
+    overflow-x: hidden;
 }
 *,
 *:before,
@@ -123,10 +124,23 @@ img {
             background:#CFCFCF;
         }
     }
-    &.gray {}
-    &red {}
+    &.gray {
+        color:#fff;
+        background:rgba(143,143,143,0.5);
+        &:hover{
+            background:rgba(143,143,143,0.4);
+        }}
+    &.red {
+        color:#fff;
+        background:rgb(212,43,77);
+        &:hover{
+            background:rgb(169,35,59);;
+        }}
     &.mini-radius {
         border-radius:5px;
+    }
+    &.full-radius {
+        border-radius:50%;
     }
 }
 .container {

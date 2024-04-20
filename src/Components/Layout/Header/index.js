@@ -14,7 +14,7 @@ export default function Header() {
                         </Link>
                      </div>
                      <div className="menu d-flex j-between align-center gap-15">
-                        <Link to="#" className="d-flex j-between align-center gap-5">
+                        <Link to="/all-movies" className="d-flex j-between align-center gap-5">
                            <h3>فیلم</h3>
                            <i className="fa-solid fa-chevron-down"></i>
                         </Link>
@@ -37,7 +37,7 @@ export default function Header() {
                      </div>
                   </div>
                   <div className="login d-flex j-between align-center gap-20">
-                     <Link to="#" className="search">
+                     <Link to="/search" className="search">
                         <div className="search-holder">
                            <img src="/assets/images/search.svg" />
                         </div>
