@@ -22,7 +22,7 @@ export default function Router() {
          element: <AllMovies />,
       },
       {
-         path: "/single-movie",
+         path: "/single-movie/:movieId",
          element: <SingleMovie />,
       },
       {

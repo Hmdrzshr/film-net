@@ -22,7 +22,7 @@ export default function MovieRenderByJenre(props) {
    const renderSlide = () => {
       return data.genres.map((currentItem) => {
          return (
-            <li>
+            <li key={currentItem.id}>
                <div></div>
                <h2>{currentItem.name}</h2>
             </li>
@@ -33,7 +33,7 @@ export default function MovieRenderByJenre(props) {
       <Style>
          <div className="movie-render-by-title">
             <h2>{props.title}</h2>
-            <ul class="gap-5">{renderSlide()}</ul>
+            <ul className="gap-5">{renderSlide()}</ul>
          </div>
       </Style>
    );

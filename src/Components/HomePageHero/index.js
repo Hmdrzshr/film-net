@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Style from "./style";
 import { Link } from "react-router-dom";
 import getApi from "../../Utils/getApi";
-import api from "../../Utils/api";
 
 export default function HomePageHero() {
    const [data, setData] = useState({
@@ -25,7 +24,6 @@ export default function HomePageHero() {
          },
       ],
    });
-   const [titleTranslation, setTitleTranslation] = useState({ translations: "" });
    const [loading, setLoading] = useState(false);
    const [slideElement, setSlideElement] = useState("item-0");
    const link = "movie/now_playing";
@@ -66,7 +64,7 @@ export default function HomePageHero() {
                      <div className="container">
                         <div className="line-1 d-flex align-center gap-15">
                            <div className="title ">
-                              <Link to="#">
+                              <Link to={`/single-movie/${currentItem.id}`}>
                                  <h1>{currentItem.title}</h1>
                               </Link>
                            </div>

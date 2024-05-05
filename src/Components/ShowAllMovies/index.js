@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import Style from "./style";
 import { Link } from "react-router-dom";
 import getApi from "../../Utils/getApi";
-import Style from "./style";
 
-export default function MovieRenderByTitle(props) {
+export default function ShowAllMovies() {
    const [data, setData] = useState({
       results: [
          {
@@ -24,30 +24,36 @@ export default function MovieRenderByTitle(props) {
          },
       ],
    });
-   const [titleTranslation, setTitleTranslation] = useState({ translations: "" });
    const [loading, setLoading] = useState(false);
    const [slideElement, setSlideElement] = useState("item-0");
-   const link = props.link;
+   const link = "discover/movie";
    useEffect(() => {
       getApi(setLoading, link, setData);
    }, []);
    const renderSlide = () => {
-      return data.results.map((currentItem) => {
+      return data.results.map((currentItem, index) => {
          return (
-            <li key={currentItem.id}>
-               <div className="img-holder">
-                  <img src={`https://image.tmdb.org/t/p/original${currentItem.backdrop_path}`} />
+            <li id={`item-${index}`} className={`item-${index}`} key={currentItem.id}>
+               <div className="content">
+                  <div className="img-holder">
+                     <img src={`https://image.tmdb.org/t/p/original${currentItem.poster_path}`} />
+                  </div>
+                  <div className="detail">
+                     <div className="title ">
+                        <Link to={`/single-movie/${currentItem.id}`}>
+                           <h1>{currentItem.title}</h1>
+                        </Link>
+                     </div>
+                  </div>
                </div>
-               <Link to={`/single-movie/${currentItem.id}`}>{currentItem.title}</Link>
             </li>
          );
       });
    };
    return (
       <Style>
-         <div className="movie-render-by-title">
-            <h2>{props.title}</h2>
-            <ul className="gap-5">{renderSlide()}</ul>
+         <div className="showed-content">
+            <ul className="d-flex wrap gap-15">{renderSlide()}</ul>
          </div>
       </Style>
    );
