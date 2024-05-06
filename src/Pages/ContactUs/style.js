@@ -8,6 +8,19 @@ export const Style = styled.div`
    .contact-us {
       background-color: ${ColorPallete.pageBackgroundColor};
       padding-bottom: 10rem;
+      .widget-icon {
+         width: 60px;
+         height: 60px;
+         background-color: ${ColorPallete.widgetBackground};
+         position: fixed;
+         right: 3rem;
+         bottom: 3rem;
+         z-index: 999;
+         svg {
+            width: 100%;
+            height: 100%;
+         }
+      }
       .hero-section {
          position: relative;
          .hero-img {
