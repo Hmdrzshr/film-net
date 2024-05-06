@@ -3,9 +3,12 @@ import styled from "styled-components";
 export const Style = styled.div`
    .footer {
       background-color: #363636;
-      padding-top: 10px;
-      font-size: 1.1rem;
+      padding-top: 3rem;
+      font-size: 1rem;
       .info {
+         h3 {
+            font-weight: 400;
+         }
          .logo a {
             display: block;
             width: 213px;
@@ -23,7 +26,7 @@ export const Style = styled.div`
       }
       .social-media {
          border-bottom: 1px solid #5e5e5e;
-         padding: 20px 0;
+         padding: 4rem 0;
          line-height: 10px;
          .go-top a {
             display: block;
