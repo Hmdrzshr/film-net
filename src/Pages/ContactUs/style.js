@@ -61,7 +61,7 @@ export const Style = styled.div`
          font-size: 1.1rem;
          .contact-type {
             margin-bottom: 2rem;
-            .col-8,
+            .col-9,
             .col-7 {
                padding: 3rem 3rem 0.5rem;
             }
@@ -84,7 +84,10 @@ export const Style = styled.div`
                margin-top: -1.5rem;
             }
             .faq {
+               position: relative;
                .questions {
+                  width: fit-content;
+                  cursor: pointer;
                   .questions-icon {
                      width: 14px;
                      height: 14px;
@@ -96,9 +99,14 @@ export const Style = styled.div`
                   }
                }
             }
-            .faq,
             .send-email {
                position: relative;
+               .mail-address {
+                  width: fit-content;
+                  h3 {
+                     display: inline-block;
+                  }
+               }
             }
             .faq:after,
             .send-email:after {
@@ -107,7 +115,7 @@ export const Style = styled.div`
                width: 0.09px;
                top: 3rem;
                left: 0;
-               bottom: 4.5rem;
+               bottom: 3rem;
                background-color: ${ColorPallete.contactUsBorder};
             }
          }

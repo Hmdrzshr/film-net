@@ -97,7 +97,7 @@ export default function ContactUs() {
                         </a>
                         <h3 className="item-color-1">پاسخگویی در سریع ترین زمان</h3>
                      </div>
-                     <div className="call-us col-8 d-flex column gap-15">
+                     <div className="call-us col-9 d-flex column gap-15">
                         <span className="call-icon icon">
                            <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -125,10 +125,11 @@ export default function ContactUs() {
                            </svg>
                         </span>
                         <h2>تماس با پشتیبانی</h2>
-                        <div className="numbers d-flex align-center gap-5">
+                        <div className="numbers d-flex align-center gap-15">
                            <a href="tel:02158172444" className="call-number1">
-                              <h3>021-58172444 /</h3>
+                              <h3>021-58172444</h3>
                            </a>
+                           <span>/</span>
                            <a href="tel:02158172555" className="call-number2">
                               <h3>021-58172555</h3>
                            </a>

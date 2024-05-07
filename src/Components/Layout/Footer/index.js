@@ -21,7 +21,7 @@ export default function Footer() {
                         <Link to="/contact-us">
                            <h3>تماس با ما</h3>
                         </Link>
-                        <Link to="about-us">
+                        <Link to="/about-us">
                            <h3>درباره فیلم نت</h3>
                         </Link>
                         <Link to="#">
@@ -39,21 +39,21 @@ export default function Footer() {
                   </div>
                   <div className="social-media d-flex j-between align-center">
                      <div className="go-top">
-                        <Link to="/" className="mini-radius">
+                        <Link to="#" className="mini-radius">
                            <img src="/assets/images/go-top.svg" />
                         </Link>
                      </div>
                      <div className="media d-flex align-center">
-                        <a href="/" className="linked-in">
+                        <a href="#" className="linked-in">
                            <img src="/assets/images/linked-in.svg" />
                         </a>
-                        <a href="/" className="twitter">
+                        <a href="#" className="twitter">
                            <img src="/assets/images/twitter.svg" />
                         </a>
-                        <a href="/" className="telegram">
+                        <a href="#" className="telegram">
                            <img src="/assets/images/telegram.svg" />
                         </a>
-                        <a href="/" className="instagram">
+                        <a href="#" className="instagram">
                            <img src="/assets/images/instagram.svg" />
                         </a>
                      </div>
