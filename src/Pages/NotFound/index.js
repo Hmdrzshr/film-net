@@ -2,7 +2,6 @@ import Style from "./style";
 import Layout from "../../Components/Layout";
 
 export default function NotFound() {
-   window.scrollTo(0, 0);
    return (
       <Style>
          <Layout>

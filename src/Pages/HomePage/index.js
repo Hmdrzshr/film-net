@@ -6,7 +6,6 @@ import MovieRenderByGenre from "../../Components/MovieRenderByGenre";
 import MovieRenderByTitleType2 from "../../Components/MovieRenderByTitleType2";
 
 export default function HomePage() {
-   window.scrollTo(0, 0);
    {
       var prevScrollpos = window.pageYOffset;
    }
