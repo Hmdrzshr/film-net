@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import Style from "./style";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import getApi from "../../Utils/getApi";
-import { Pagination } from "antd";
+import Style from "./style";
 
-export default function ShowAllMovies() {
+export default function MovieRenderByTitleType2(props) {
    const [data, setData] = useState({
       results: [
          {
@@ -24,12 +23,12 @@ export default function ShowAllMovies() {
             vote_count: "",
          },
       ],
-      total_pages: "",
    });
-   const [pageNum, setPageNum] = useState(1);
+   const ITEM_WIDTH = 90;
+   const [scrollPosition, setScrollPosition] = useState(0);
+   const ulRef = useRef();
    const [loading, setLoading] = useState(false);
-   const [slideElement, setSlideElement] = useState("item-0");
-   const link = `discover/movie?page=${pageNum}`;
+   const link = props.link;
    useEffect(() => {
       getApi(setLoading, link, setData);
    }, []);
@@ -82,18 +81,21 @@ export default function ShowAllMovies() {
          }
       });
    }
+   const handleScroll = (scrollAmount) => {
+      const newScrollPosition = scrollPosition + scrollAmount;
+      setScrollPosition(newScrollPosition);
+      ulRef.current.scrollLeft = newScrollPosition;
+   };
    const renderSlide = () => {
-      return data.results.map((currentItem, index) => {
+      return data.results.map((currentItem) => {
          return (
-            <li id={`item-${index}`} className={`item-${index} medium-radius`} key={currentItem.id}>
-               <div className="content">
-                  <div className="img-holder">
-                     {currentItem.backdrop_path ? (
-                        <img src={`https://image.tmdb.org/t/p/w500${currentItem.poster_path}`} />
-                     ) : (
-                        <img src="\assets\images\image-not-found.png" />
-                     )}
-                  </div>
+            <li key={currentItem.id} className="medium-radius">
+               <div className="img-holder">
+                  {currentItem.backdrop_path ? (
+                     <img src={`https://image.tmdb.org/t/p/w500${currentItem.poster_path}`} />
+                  ) : (
+                     <img src="\assets\images\image-not-found.png" />
+                  )}
                   <div className="item-content d-flex column gap-10">
                      <Link to={`/single-movie/${currentItem.id}`}>
                         <h3>{currentItem.title}</h3>
@@ -110,17 +112,32 @@ export default function ShowAllMovies() {
    };
    return (
       <Style>
-         <div className="showed-content">
-            <ul className="slide-of-movies d-flex wrap gap-15">{renderSlide()}</ul>
-            <div className="pagination-part d-flex align-center j-center">
-               <Pagination
-                  defaultCurrent={1}
-                  total={data.total_pages}
-                  showSizeChanger={false} // ba in attribute tedad'e fil dar safero khamush kardim chon hamchin api'i tu in site nadarim
-                  onChange={(e) => {
-                     getApi(setLoading, `discover/movie?page=${e}`, setData);
-                  }}
-               />
+         <div className="movie-render-by-title-type-2">
+            <h2>{props.title}</h2>
+            <ul ref={ulRef} className={`d-flex gap-20 ${props.wrap ? "wrap" : ""}`}>
+               {renderSlide()}
+            </ul>
+            <div
+               onClick={() => {
+                  handleScroll(-ITEM_WIDTH);
+               }}
+               onMouseDown={() => {
+                  handleScroll(-ITEM_WIDTH);
+               }}
+               className="scroll-left"
+            >
+               <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div
+               onClick={() => {
+                  handleScroll(ITEM_WIDTH);
+               }}
+               onMouseDown={() => {
+                  handleScroll(ITEM_WIDTH);
+               }}
+               className="scroll-right"
+            >
+               <i class="fa-solid fa-angle-right"></i>
             </div>
          </div>
       </Style>

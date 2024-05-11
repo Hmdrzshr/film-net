@@ -1,11 +1,23 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import Style from "./style";
+import Layout from "../../Components/Layout";
 
 export default function NotFound() {
-    return (
-        <Fragment>
-            <Link to="/">go to home page</Link>
-            <h1>this is not found page</h1>
-        </Fragment>
-    );
+   return (
+      <Style>
+         <Layout>
+            <div className="not-found">
+               <div className="img-holder">
+                  <img src="/assets/images/not-found-img.svg" />
+               </div>
+               <div className="content">
+                  <h1>نیست!</h1>
+                  <h2>صفحه مورد نظر یافت نشد.</h2>
+                  <a href="#" className="button white medium-radius">
+                     <h3>بازگشت</h3>
+                  </a>
+               </div>
+            </div>
+         </Layout>
+      </Style>
+   );
 }

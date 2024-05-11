@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Style = styled.div`
-   .movie-render-by-title {
-      ul {
+   .movie-render-by-genre {
+      /* ul {
          display: flex;
          li {
             width: 200px;
@@ -20,7 +20,7 @@ export const Style = styled.div`
                top: 0;
             }
          }
-      }
+      } */
    }
 `;
 export default Style;

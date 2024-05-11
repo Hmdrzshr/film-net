@@ -24,7 +24,7 @@ ol {
 }
 a {
     text-decoration: none;
-    color: #fff;
+    color: ${ColorPallete.white};
 }
 .container {
     max-width:1260px;
@@ -193,14 +193,14 @@ img {
 .button {
     padding:5px 15px;
     &.white {
-        color:#1C1C1C;
-        background:rgb(237,237,237);
+        color:${ColorPallete.menuBackgroundColor};
+        background:${ColorPallete.headerBuyBackground};
         &:hover{
-            background:#CFCFCF;
+            background:${ColorPallete.headerBuyHoverBackground};
         }
     }
     &.gray {
-        color:#fff;
+        color:${ColorPallete.white};
         background:rgba(143,143,143,0.5);
         &:hover{
             background:rgba(143,143,143,0.4);

@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import ColorPallete from "../../../AboutStyle/colorPallete";
 
 export const Style = styled.div`
    .header {
       width: 100%;
       font-size: 1.2rem;
       padding: 3px 0;
-      background-image: linear-gradient(to top, transparent, transparent, #000);
+      background-image: linear-gradient(to top, transparent, ${ColorPallete.pageBackgroundColor});
       transition: all 300ms;
       position: fixed;
       top: 0;
@@ -15,94 +16,41 @@ export const Style = styled.div`
          padding: 10px 0;
       }
       .menu {
-         .movie {
-            position: relative;
-            .hide-menu {
-               width: 45px;
-               height: 20px;
-               background-color: transparent;
-               position: absolute;
-               display: none;
-               ul {
-                  display: none;
-                  /* height: 0; */
-                  color: #fff;
-                  position: absolute;
-                  top: 17px;
-                  right: -5px;
-                  width: 400px;
-                  background-color: #292929;
-                  padding-top: 12px;
-                  padding-bottom: 12px;
-                  padding-right: 15px;
-                  gap: 10px 25px;
-                  /* transition-duration: 250ms;
-                  transition-timing-function: ease;
-                  transition-delay: 0s;
-                  transition-property: height; */
-
-                  li {
-                     padding-right: 5px;
-                     width: 96px;
-                     &:hover {
-                        background-color: rgba(255, 255, 255, 0.15);
-                     }
-                     h3 {
-                        cursor: pointer;
-                        display: inline-block;
-                     }
-                  }
-               }
-            }
-
-            &:hover .hide-menu {
-               display: flex;
-            }
-            &:hover .hide-menu ul {
-               display: flex;
-               /* height: auto; */
-            }
-         }
+         .movie,
          .serie {
             position: relative;
-            transition: all 2s;
-            .hide-menu {
-               width: 45px;
-               height: 20px;
-               background-color: transparent;
+            ul {
+               /* height: 0; */
+               /* overflow: hidden; */
+               color: ${ColorPallete.white};
                position: absolute;
-               display: none;
-               ul {
-                  color: #fff;
-                  position: absolute;
-                  display: none;
-                  top: 17px;
-                  right: -5px;
-                  width: 400px;
-                  background-color: #292929;
-                  padding-top: 12px;
-                  padding-bottom: 12px;
-                  padding-right: 15px;
-                  gap: 10px 25px;
-                  li {
-                     padding-right: 5px;
-                     width: 96px;
-                     &:hover {
-                        background-color: rgba(255, 255, 255, 0.15);
-                     }
-                     h3 {
-                        cursor: pointer;
-                        display: inline-block;
-                     }
+               top: 39px;
+               right: -7px;
+               width: 400px;
+               background-color: ${ColorPallete.menuBackgroundColor};
+               padding-top: 12px;
+               padding-bottom: 12px;
+               padding-right: 15px;
+               gap: 10px 25px;
+               /* opacity: 0; */
+               transition: all 400ms;
+
+               li {
+                  padding-right: 5px;
+                  width: 96px;
+                  &:hover {
+                     background-color: rgba(255, 255, 255, 0.15);
+                  }
+                  h3 {
+                     cursor: pointer;
+                     display: inline-block;
                   }
                }
             }
-            &:hover .hide-menu {
-               display: flex;
-            }
-            &:hover .hide-menu ul {
-               display: flex;
-            }
+            /* &:hover ul {
+               opacity: 1;
+               height: 174px;
+            } */
          }
          .icon {
             font-size: 6px;
@@ -125,6 +73,15 @@ export const Style = styled.div`
       h3 {
          font-weight: 400;
       }
+   }
+   .hidden {
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+   }
+   .show {
+      height: 174px;
+      opacity: 1;
    }
 `;
 export default Style;

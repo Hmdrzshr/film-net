@@ -1,8 +1,53 @@
 import styled from "styled-components";
+import ColorPallete from "../../../AboutStyle/colorPallete";
 
 export const Style = styled.div`
+   .dynamic-footer {
+      position: fixed;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      z-index: 999;
+      transition: all 300ms;
+      /* display: none; */
+      background-color: ${ColorPallete.footerBackground};
+      height: 55.4px;
+      .menu {
+         padding-right: 1rem;
+         .go-top {
+            a {
+               display: inline-block;
+               width: 16px;
+               height: 16px;
+
+               img {
+                  object-fit: cover;
+                  border-radius: 3px;
+               }
+            }
+         }
+         .links {
+            h3 {
+               font-weight: 300;
+               font-size: 1.2rem;
+            }
+         }
+      }
+      .get-app {
+         padding-left: 2rem;
+         span {
+            display: inline-block;
+            width: 21px;
+            height: 21px;
+         }
+         h3 {
+            font-weight: 300;
+            font-size: 1.4rem;
+         }
+      }
+   }
    .footer {
-      background-color: #363636;
+      background-color: ${ColorPallete.footerBackground};
       padding-top: 3rem;
       font-size: 1rem;
       .info {

@@ -5,7 +5,7 @@ import { useState } from "react";
 import getApi from "../../Utils/getApi";
 import ColorPallete from "../../AboutStyle/colorPallete";
 
-export default function SearchTable({ getInputData }) {
+export default function SearchTable({ getInputData, initialWord }) {
    return (
       <Style>
          <div className="table mini-radius">
@@ -47,6 +47,7 @@ export default function SearchTable({ getInputData }) {
                         border: "none",
                      }}
                      placeholder="جستجو..."
+                     defaultValue={initialWord}
                      suffix={<SearchOutlined rotate={80} />}
                      onChange={(event) => {
                         getInputData(event.target.value);

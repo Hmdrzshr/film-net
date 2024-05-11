@@ -5,6 +5,37 @@ import { Link } from "react-router-dom";
 export default function Footer() {
    return (
       <Style>
+         <div id="dynamic-footer" className="dynamic-footer d-flex j-between align-center">
+            <div className="menu d-flex align-center gap-35">
+               <div className="go-top">
+                  <Link to="item-0" className="mini-radius">
+                     <img src="/assets/images/go-top.svg" />
+                  </Link>
+               </div>
+               <div className="links d-flex align-center gap-15">
+                  <Link to="#">
+                     <h3>پرسش های متداول</h3>
+                  </Link>
+                  <Link to="/contact-us">
+                     <h3>تماس با ما</h3>
+                  </Link>
+                  <Link to="#">
+                     <h3>قوانین و مقررات</h3>
+                  </Link>
+                  <Link to="/about-us">
+                     <h3>شبکه های اجتماعی</h3>
+                  </Link>
+               </div>
+            </div>
+            <div className="get-app d-flex j-between align-center gap-10">
+               <span>
+                  <img src="/assets/images/get-app.svg" />
+               </span>
+               <Link to="#">
+                  <h3>دریافت اپلیکیشن های فیلم نت</h3>
+               </Link>
+            </div>
+         </div>
          <div className="footer">
             <div className="container">
                <div className="footer-contents">

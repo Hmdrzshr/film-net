@@ -4,17 +4,19 @@ import { genreList } from "../../../Utils/genreList";
 import { useState } from "react";
 
 export default function Header() {
-   const [headerIsHovered, setHeaderIsHovered] = useState(false);
-   function changeHeadersBackground() {
-      setHeaderIsHovered(true);
-      // document.getElementById("header").classList.add("hover-background");
+   const [movieItemIsHovered, setMovieItemIsHovered] = useState(false);
+   const [serieItemIsHovered, setSerieItemIsHovered] = useState(false);
+   function changeHeadersBackgroundForMovie() {
+      setMovieItemIsHovered(true);
    }
-   function defaultHeadersBackground() {
-      setHeaderIsHovered(false);
-      // const stopHover = document.getElementById("header");
-      // stopHover.removeEventListener("onmouseover", changeHeadersBackground);
-      // document.getElementById("header").style.background =
-      //    "linear-gradient(to top, transparent, transparent, #000)";
+   function defaultHeadersBackgroundForMovie() {
+      setMovieItemIsHovered(false);
+   }
+   function changeHeadersBackgroundForSerie() {
+      setSerieItemIsHovered(true);
+   }
+   function defaultHeadersBackgroundForSerie() {
+      setSerieItemIsHovered(false);
    }
    function renderGenreItems() {
       return genreList.map(({ genreName }) => {
@@ -27,7 +29,12 @@ export default function Header() {
    }
    return (
       <Style>
-         <div id="header" className={`header ${headerIsHovered ? "hover-background" : ""}`}>
+         <div
+            id="header"
+            className={`header ${movieItemIsHovered ? "hover-background" : ""} ${
+               serieItemIsHovered ? "hover-background" : ""
+            }`}
+         >
             <div className="container">
                <div className="header-contents d-flex j-between align-center">
                   <div className="logo-menu d-flex j-between align-center gap-50">
@@ -38,8 +45,8 @@ export default function Header() {
                      </div>
                      <div className="menu d-flex j-between align-center gap-15">
                         <div
-                           onMouseOver={changeHeadersBackground}
-                           onMouseOut={defaultHeadersBackground}
+                           onMouseOver={changeHeadersBackgroundForMovie}
+                           onMouseOut={defaultHeadersBackgroundForMovie}
                            className="movie"
                         >
                            <Link
@@ -49,26 +56,35 @@ export default function Header() {
                               <h3>فیلم</h3>
                               <i className="fa-solid fa-chevron-down icon"></i>
                            </Link>
-                           <div className="hide-menu">
-                              <ul className="d-flex wrap gap-15 medium-radius">
-                                 {renderGenreItems()}
-                              </ul>
-                           </div>
+
+                           <ul
+                              className={`header d-flex wrap gap-15 medium-radius ${
+                                 movieItemIsHovered ? "show" : "hidden"
+                              }`}
+                           >
+                              {renderGenreItems()}
+                           </ul>
                         </div>
                         <div
-                           onMouseOver={changeHeadersBackground}
-                           onMouseOut={defaultHeadersBackground}
+                           onMouseOver={changeHeadersBackgroundForSerie}
+                           onMouseOut={defaultHeadersBackgroundForSerie}
                            className="serie"
                         >
-                           <Link to="#" className="underlined d-flex j-between align-center gap-5">
+                           <Link
+                              to="/all-movies"
+                              className="underlined d-flex j-between align-center gap-5"
+                           >
                               <h3>سریال</h3>
                               <i className="fa-solid fa-chevron-down icon"></i>
                            </Link>
-                           <div className="hide-menu">
-                              <ul className="d-flex wrap gap-15 medium-radius">
-                                 {renderGenreItems()}
-                              </ul>
-                           </div>
+
+                           <ul
+                              className={`header d-flex wrap gap-15 medium-radius ${
+                                 serieItemIsHovered ? "show" : "hidden"
+                              }`}
+                           >
+                              {renderGenreItems()}
+                           </ul>
                         </div>
                         <div className="underlined sort">
                            <Link to="#">
@@ -93,7 +109,7 @@ export default function Header() {
                      </div>
                   </div>
                   <div className="login d-flex j-between align-center gap-20">
-                     <Link to="/search" className="search">
+                     <Link to="/all-movies" className="search">
                         <div className="search-holder">
                            <img src="/assets/images/search.svg" />
                         </div>

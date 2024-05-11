@@ -59,7 +59,10 @@ export default function HomePageHero() {
          return (
             <li id={`item-${index}`} className={`item-${index}`} key={currentItem.id}>
                <div className="holder">
-                  <img src={`https://image.tmdb.org/t/p/original${currentItem.backdrop_path}`} />
+                  <div className="img-holder">
+                     <img src={`https://image.tmdb.org/t/p/original${currentItem.backdrop_path}`} />
+                     <div className="left-dark"></div>
+                  </div>
                   <div className="hero-content">
                      <div className="container">
                         <div className="line-1 d-flex align-center gap-15">

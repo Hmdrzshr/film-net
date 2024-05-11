@@ -347,7 +347,7 @@ export default function AboutUs() {
                               </span>
                               <h2>پرسش‌های متداول</h2>
                            </a>
-                           <a href="#" className="d-flex align-center j-center gap-5">
+                           <a href="/contact-us" className="d-flex align-center j-center gap-5">
                               <span className="link-icon">
                                  <svg
                                     width="30"

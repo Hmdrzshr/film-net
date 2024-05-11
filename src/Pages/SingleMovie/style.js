@@ -15,6 +15,45 @@ export const Style = styled.div`
          min-height: 700px;
          position: relative;
          .poster-holder {
+            position: relative;
+            &:after {
+               content: "";
+               position: absolute;
+               right: 0;
+               bottom: 0;
+               background-image: linear-gradient(
+                  to left,
+                  ${ColorPallete.pageBackgroundColor},
+                  transparent
+               );
+               width: 60%;
+               height: 100%;
+            }
+            &:before {
+               content: "";
+               position: absolute;
+               right: 0;
+               bottom: 0;
+               background-image: linear-gradient(
+                  to top,
+                  ${ColorPallete.pageBackgroundColor},
+                  transparent
+               );
+               width: 100%;
+               height: 36%;
+            }
+            .left-dark {
+               position: absolute;
+               left: 0;
+               bottom: 0;
+               background-image: linear-gradient(
+                  to right,
+                  ${ColorPallete.pageBackgroundColor},
+                  transparent
+               );
+               width: 30%;
+               height: 100%;
+            }
          }
          .hero-movie-info {
             position: absolute;
@@ -175,14 +214,19 @@ export const Style = styled.div`
       }
 
       .movie-characters {
-         margin-top: 100px;
+         position: relative;
+         margin-top: 12rem;
          h2 {
             color: #fff;
             font-weight: 500;
             font-size: 2.5rem;
          }
          ul {
-            overflow: auto;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            &::-webkit-scrollbar {
+               display: none;
+            }
             li {
                padding: 1rem;
                background-color: ${ColorPallete.menuBackgroundColor};
@@ -203,24 +247,124 @@ export const Style = styled.div`
                }
             }
          }
+         .scroll-left {
+            position: absolute;
+            left: -2rem;
+            bottom: 0rem;
+            width: 2rem;
+            height: 7.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            background-color: transparent;
+            color: #fff;
+            cursor: pointer;
+         }
+         .scroll-right {
+            position: absolute;
+            right: -2rem;
+            bottom: 0rem;
+            width: 2rem;
+            height: 7.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            background-color: transparent;
+            color: #fff;
+            cursor: pointer;
+         }
       }
       .movie-similar {
+         margin-top: 5rem;
          margin-top: 100px;
+         position: relative;
          h2 {
             color: #fff;
             font-weight: 500;
             font-size: 2.5rem;
          }
          ul {
-            overflow: auto;
-            li {
-               width: 200px;
-               height: 300px;
-               flex-shrink: 0;
+            margin-top: 2rem;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            &::-webkit-scrollbar {
+               display: none;
             }
+            li {
+               width: calc(12.5% - 16px);
+               height: 200px;
+               overflow: hidden;
+               flex-shrink: 0;
+               .img-holder {
+                  position: relative;
+                  height: 100%;
+                  &:before {
+                     content: "";
+                     opacity: 0;
+                     position: absolute;
+                     width: 100%;
+                     height: 100%;
+                     background-color: rgba(0, 0, 0, 0.7);
+                     transition: opacity 500ms;
+                  }
+                  img {
+                     object-fit: cover;
+                  }
+                  .item-content {
+                     opacity: 0;
+                     position: absolute;
+                     top: 25px;
+                     right: 15px;
+                     transition: opacity 500ms;
+                     z-index: 2;
+                     h3 {
+                        font-size: 1.5rem;
+                        font-weight: 300;
+                        color: ${ColorPallete.white};
+                     }
+                  }
+               }
+               &:hover {
+                  .img-holder:before,
+                  .img-holder .item-content {
+                     opacity: 1;
+                  }
+               }
+            }
+         }
+         .scroll-left {
+            position: absolute;
+            left: -2rem;
+            bottom: 0rem;
+            width: 2rem;
+            height: 20rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            background-color: transparent;
+            color: #fff;
+            cursor: pointer;
+         }
+         .scroll-right {
+            position: absolute;
+            right: -2rem;
+            bottom: 0rem;
+            width: 2rem;
+            height: 20rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            background-color: transparent;
+            color: #fff;
+            cursor: pointer;
          }
       }
       .movie-comments {
+         margin-top: 6rem;
          width: 912px;
          margin-left: auto;
          margin-right: auto;
@@ -231,6 +375,7 @@ export const Style = styled.div`
             text-align: center;
          }
          .text-place {
+            margin-top: 2rem;
             background-color: ${ColorPallete.menuBackgroundColor};
             padding: 2rem 2rem;
             img {

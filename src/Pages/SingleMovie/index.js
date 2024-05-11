@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import getApi from "../../Utils/getApi";
 import Style from "./style";
@@ -7,7 +7,7 @@ import { Input } from "antd";
 
 export default function SingleMovie() {
    const { movieId } = useParams();
-   const [inputData, setInputData] = useState("");
+   const [currentMovieId, setCurrentMovieId] = useState("");
    const link = `movie/${movieId}?append_to_response=images,translations,credits,similar`;
    const [data, setData] = useState({
       adult: "",
@@ -113,12 +113,26 @@ export default function SingleMovie() {
          ],
       },
    });
-
+   const ITEM_WIDTH = 90;
+   const [scrollPosition, setScrollPosition] = useState(0);
+   const [scrollPosition_2, setScrollPosition_2] = useState(0);
+   const ulRef = useRef();
+   const ulRef_2 = useRef();
+   const handleScroll = (scrollAmount) => {
+      const newScrollPosition = scrollPosition + scrollAmount;
+      setScrollPosition(newScrollPosition);
+      ulRef.current.scrollLeft = newScrollPosition;
+   };
+   const handleScroll_2 = (scrollAmount) => {
+      const newScrollPosition_2 = scrollPosition_2 + scrollAmount;
+      setScrollPosition_2(newScrollPosition_2);
+      ulRef_2.current.scrollLeft = newScrollPosition_2;
+   };
    const [loading, setLoading] = useState(false);
-   const [movieTranslatedTitle, setMovieTranslatedTitle] = useState(false);
    useEffect(() => {
       getApi(setLoading, link, setData);
-   }, []);
+   }, [currentMovieId]);
+
    // function renderImages(source) {
    //    return source.map((item) => {
    //       return (
@@ -287,7 +301,7 @@ export default function SingleMovie() {
          if (cI.known_for_department == "Acting") {
             actors.push({
                peopleName: cI.name,
-               peopleImg: `https://image.tmdb.org/t/p/w500${cI.profile_path}`,
+               peopleImg: cI.profile_path,
                peopleJob: cI.known_for_department,
             });
          }
@@ -296,7 +310,11 @@ export default function SingleMovie() {
          return (
             <li key={cI.peopleName} className="d-flex align-center medium-radius">
                <div className="img-holder">
-                  <img src={cI.peopleImg} />
+                  {cI.peopleImg ? (
+                     <img src={`https://image.tmdb.org/t/p/w500${cI.peopleImg}`} />
+                  ) : (
+                     <img src="\assets\images\image-not-found.png" />
+                  )}
                </div>
                <div className="people-info d-flex column">
                   <h3>{cI.peopleName}</h3>
@@ -312,7 +330,7 @@ export default function SingleMovie() {
          if (cI.character.includes("voice")) {
             dubs.push({
                peopleName: cI.name,
-               peopleImg: `https://image.tmdb.org/t/p/w500${cI.profile_path}`,
+               peopleImg: cI.profile_path,
                peopleJob: cI.known_for_department,
             });
          }
@@ -321,7 +339,11 @@ export default function SingleMovie() {
          return (
             <li key={cI.peopleName} className="d-flex align-center medium-radius">
                <div className="img-holder">
-                  <img src={cI.peopleImg} />
+                  {cI.peopleImg ? (
+                     <img src={`https://image.tmdb.org/t/p/w500${cI.peopleImg}`} />
+                  ) : (
+                     <img src="\assets\images\image-not-found.png" />
+                  )}
                </div>
                <div className="people-info">
                   <h3>{cI.peopleName}</h3>
@@ -337,9 +359,13 @@ export default function SingleMovie() {
             return (
                <li key={data.credits.cast[i].name} className="d-flex align-center medium-radius">
                   <div className="img-holder">
-                     <img
-                        src={`https://image.tmdb.org/t/p/original${data.credits.cast[i].profile_path}`}
-                     />
+                     {data.credits.cast[i].profile_path ? (
+                        <img
+                           src={`https://image.tmdb.org/t/p/w500${data.credits.cast[i].profile_path}`}
+                        />
+                     ) : (
+                        <img src="\assets\images\image-not-found.png" />
+                     )}
                   </div>
                   <div className="people-info">
                      <h3>{data.credits.cast[i].name}</h3>
@@ -356,9 +382,13 @@ export default function SingleMovie() {
             return (
                <li key={data.credits.cast[i].name} className="d-flex align-center medium-radius">
                   <div className="img-holder">
-                     <img
-                        src={`https://image.tmdb.org/t/p/original${data.credits.cast[i].profile_path}`}
-                     />
+                     {data.credits.cast[i].profile_path ? (
+                        <img
+                           src={`https://image.tmdb.org/t/p/w500${data.credits.cast[i].profile_path}`}
+                        />
+                     ) : (
+                        <img src="\assets\images\image-not-found.png" />
+                     )}
                   </div>
                   <div className="people-info">
                      <h3>{data.credits.cast[i].name}</h3>
@@ -370,9 +400,13 @@ export default function SingleMovie() {
             return (
                <li key={data.credits.crew[i].name} className="d-flex align-center medium-radius">
                   <div className="img-holder">
-                     <img
-                        src={`https://image.tmdb.org/t/p/original${data.credits.crew[i].profile_path}`}
-                     />
+                     {data.credits.crew[i].profile_path ? (
+                        <img
+                           src={`https://image.tmdb.org/t/p/w500${data.credits.crew[i].profile_path}`}
+                        />
+                     ) : (
+                        <img src="\assets\images\image-not-found.png" />
+                     )}
                   </div>
                   <div className="people-info">
                      <h3>{data.credits.crew[i].name}</h3>
@@ -383,12 +417,84 @@ export default function SingleMovie() {
          }
       }
    }
+   function movieGenres2(item) {
+      return item.genre_ids.map((cI) => {
+         if (cI == "Crime") {
+            return <h3>جنایی</h3>;
+         }
+         if (cI == "War") {
+            return <h3>جنگی</h3>;
+         }
+         if (cI == "12") {
+            return <h3>ماجرایی</h3>;
+         }
+         if (cI == "9648") {
+            return <h3>معمایی</h3>;
+         }
+         if (cI == "10749") {
+            return <h3>عاشقانه</h3>;
+         }
+         if (cI == "878") {
+            return <h3>علمی تخیلی</h3>;
+         }
+         if (cI == "10402") {
+            return <h3>موزیکال</h3>;
+         }
+         if (cI == "27") {
+            return <h3>ترسناک</h3>;
+         }
+         if (cI == "18") {
+            return <h3>درام</h3>;
+         }
+         if (cI == "10751") {
+            return <h3>خانوادگی</h3>;
+         }
+         if (cI == "36") {
+            return <h3>تاریخی</h3>;
+         }
+         if (cI == "28") {
+            return <h3>اکشن</h3>;
+         }
+         if (cI == "35") {
+            return <h3>کمدی</h3>;
+         }
+         if (cI == "37") {
+            return <h3>وسترن</h3>;
+         }
+         if (cI == "99") {
+            return <h3>مستند</h3>;
+         }
+      });
+   }
    function getMovieSimilar() {
       return data.similar.results.map((cI) => {
          return (
-            <li key={cI.id}>
-               <img src={`https://image.tmdb.org/t/p/original${cI.poster_path}`} />
-               <h1>{cI.original_title}</h1>
+            // <li key={cI.id}>
+            //    <img src={`https://image.tmdb.org/t/p/original${cI.poster_path}`} />
+            //    <h1>{cI.original_title}</h1>
+            // </li>
+            <li key={cI.id} className="medium-radius">
+               <div className="img-holder">
+                  {cI.backdrop_path ? (
+                     <img src={`https://image.tmdb.org/t/p/w500${cI.poster_path}`} />
+                  ) : (
+                     <img src="\assets\images\image-not-found.png" />
+                  )}
+                  <div className="item-content d-flex column gap-10">
+                     <Link
+                        to={`/single-movie/${cI.id}`}
+                        onClick={() => {
+                           setCurrentMovieId(cI.id);
+                        }}
+                     >
+                        <h3>{cI.title}</h3>
+                     </Link>
+                     <h3>{cI.release_date.slice(0, 4)}</h3>
+                     <Link to="#" className="d-flex align-center wrap gap-15">
+                        {movieGenres2(cI)}
+                     </Link>
+                  </div>
+               </div>
             </li>
          );
       });
@@ -417,6 +523,7 @@ export default function SingleMovie() {
                   <div className="poster-holder">
                      {/* {renderImages(data.images.backdrops)} */}
                      <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} />
+                     <div className="left-dark"></div>
                   </div>
                   <div className="hero-movie-info">
                      <div className="container">
@@ -513,7 +620,9 @@ c-0.4-0.2-1-0.3-1.6-0.3c-0.5,0-1.2,0.1-1.6,0.3c-0.4,0.2-0.9,0.5-1.2,0.9V0.2H33.7
                               <div className="dash">
                                  <span>-</span>
                               </div>
-                              <div className="movie-production">{movieProductions()}</div>
+                              <div className="movie-production d-flex align-center gap-10">
+                                 {movieProductions()}
+                              </div>
                               <div className="movie-subtitle d-flex align-center gap-5">
                                  <span className="sub-icon">
                                     <svg
@@ -590,21 +699,65 @@ c-0.4-0.2-1-0.3-1.6-0.3c-0.5,0-1.2,0.1-1.6,0.3c-0.4,0.2-0.9,0.5-1.2,0.9V0.2H33.7
                      </div>
                   </div>
                </div>
-               <div className="movie-characters">
-                  <div className="container">
+               <div className="container">
+                  <div className="movie-characters">
                      <h2>ستارگان</h2>
-                     <ul className="d-flex align-center gap-10">
+                     <ul ref={ulRef} className="d-flex align-center gap-10">
                         {data.credits.cast[0].character.includes("voice") ? getDubs() : getActors()}
                         {getWriter()}
                         {getProducter()}
                      </ul>
+                     <div
+                        onClick={() => {
+                           handleScroll(-ITEM_WIDTH);
+                        }}
+                        onMouseDown={() => {
+                           handleScroll(-ITEM_WIDTH);
+                        }}
+                        className="scroll-left"
+                     >
+                        <i class="fa-solid fa-angle-left"></i>
+                     </div>
+                     <div
+                        onClick={() => {
+                           handleScroll(ITEM_WIDTH);
+                        }}
+                        onMouseDown={() => {
+                           handleScroll(ITEM_WIDTH);
+                        }}
+                        className="scroll-right"
+                     >
+                        <i class="fa-solid fa-angle-right"></i>
+                     </div>
                   </div>
-               </div>
 
-               <div className="movie-similar">
-                  <div className="container">
+                  <div className="movie-similar">
                      <h2>مشابه {translatedTitle()}</h2>
-                     <ul className="d-flex gap-10">{getMovieSimilar()}</ul>
+                     <ul ref={ulRef_2} className="d-flex gap-10">
+                        {getMovieSimilar()}
+                     </ul>
+                     <div
+                        onClick={() => {
+                           handleScroll_2(-ITEM_WIDTH);
+                        }}
+                        onMouseDown={() => {
+                           handleScroll_2(-ITEM_WIDTH);
+                        }}
+                        className="scroll-left"
+                     >
+                        <i class="fa-solid fa-angle-left"></i>
+                     </div>
+                     <div
+                        onClick={() => {
+                           handleScroll_2(ITEM_WIDTH);
+                        }}
+                        onMouseDown={() => {
+                           handleScroll_2(ITEM_WIDTH);
+                        }}
+                        className="scroll-right"
+                     >
+                        <i class="fa-solid fa-angle-right"></i>
+                     </div>
                   </div>
                </div>
                <div className="movie-comments">
