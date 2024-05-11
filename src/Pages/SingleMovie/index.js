@@ -6,6 +6,7 @@ import Layout from "../../Components/Layout";
 import { Input } from "antd";
 
 export default function SingleMovie() {
+   window.scrollTo(0, 0);
    const { movieId } = useParams();
    const [currentMovieId, setCurrentMovieId] = useState("");
    const link = `movie/${movieId}?append_to_response=images,translations,credits,similar`;

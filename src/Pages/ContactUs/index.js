@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Style from "./style";
 
 export default function ContactUs() {
+   window.scrollTo(0, 0);
    return (
       <Style>
          <Layout>

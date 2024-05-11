@@ -9,6 +9,7 @@ import { Link, createSearchParams, useSearchParams } from "react-router-dom";
 import { Pagination } from "antd";
 
 export default function AllMovies() {
+   window.scrollTo(0, 0);
    const [typedWord, setTypedWord] = useState("");
    const [inputData, setInputData] = useState({
       results: [
